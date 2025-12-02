@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- This imports a nice looking font from Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+       <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           SECTION 1: THE DESIGN SYSTEM (Change Colors Here)
+           ========================================= */
+        :root {
+            --primary-color: #0f172a;       /* Dark Navy for professionalism */
+            --secondary-color: #334155;     /* Lighter navy for hover */
+            --background-color: #f8fafc;    /* Page background (Light Grey) */
+            --card-background: #ffffff;     /* Product card background (White) */
+            --text-main: #1e293b;           /* Main text color (Dark Grey) */
+            --text-light: #64748b;          /* Price/Description text color */
+            --accent-color: #ef4444;        /* Red for alerts/badges */
+            --ai-color: #7c3aed;            /* Purple for AI features */
+            --success-color: #10b981;       /* Green for success */
+            --star-color: #fbbf24;          /* Gold for stars */
+            --vip-gold: #f59e0b;            /* Gold for VIP features */
+        }
+
+        /* =========================================
+           SECTION 2: GENERAL STYLES (Layout)
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--card-background);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* NEW: LOGO IMAGE STYLE */
+        .logo-img {file:///C:/Users/Analie%20Aidaros/OneDrive/Desktop/website/AidarosPrint.html}
+            height: 45px; /* Adjust this height to fit your logo */
+            width: auto;
+            object-fit: contain;
+        }
+        /* Optional background helper if you prefer using CSS background-image */
+        .logo-bg {c:\Users\Analie Aidaros\Downloads\Screenshot_2025-12-02_000730-removebg-preview.png}
+            display: inline-block;
+            width: 180px;
+            height: 45px;
+            background-image: url('images/aidaros-logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        @media (max-width: 640px) {
+            .logo-img,
+            .logo-bg {
+                height: 36px;
+                width: auto;
+            }
+        }
+
+        /* High DPI suggestion: provide images/aidaros-logo@2x.png for retina */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .logo-bg { background-image: url('images/aidaros-logo@2x.png'); }
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: #f1f5f9;
+            border-radius: 50px;
+            transition: background-color 0.2s;
+            gap: 8px; /* Added gap for icon spacing */
+        }
+
+        .cart-icon:hover {
+            background-color: #e2e8f0;
+        }
+
+        .cart-count {
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            font-weight: 700;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .cta-button:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Step-by-Step Guide Section */
+        .steps-section {
+            background-color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .step-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .step-card:hover .step-icon {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Product Card Design */
+        .product-card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #f1f5f9;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .product-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .product-options {
+            margin-top: auto;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .option-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .option-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .option-select, .qty-input, .text-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            cursor: pointer;
+        }
+        
+        .text-input {
+            cursor: text;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-btn {
+            border: 2px dashed #cbd5e1;
+            color: var(--text-light);
+            background-color: #f8fafc;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: #e2e8f0;
+        }
+
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .proof-check {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            gap: 8px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            background-color: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .unit-price-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .product-total-price {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .save-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background-color 0.2s;
+        }
+        
+        .save-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* VIP SECTION */
+        .vip-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .vip-card {
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 2rem auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .vip-icon {
+            font-size: 3rem;
+            color: var(--vip-gold);
+            margin-bottom: 1rem;
+        }
+        
+        .vip-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--vip-gold);
+            margin: 1rem 0;
+        }
+        
+        .vip-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .vip-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .vip-list i {
+            color: var(--success-color);
+        }
+        
+        .vip-btn {
+            background-color: var(--vip-gold);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        
+        .vip-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* AI Section Styles */
+        .ai-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dbeafe 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 900px;
+            text-align: center;
+            border: 2px solid var(--ai-color);
+            box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.15);
+        }
+
+        .ai-header {
+            margin-bottom: 2rem;
+        }
+
+        .ai-badge {
+            background-color: var(--ai-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .ai-input-group {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ai-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .ai-btn {
+            background-color: var(--ai-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .ai-btn:hover {
+            background-color: #6d28d9;
+        }
+
+        .ai-result {
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: left;
+            border-left: 4px solid var(--ai-color);
+            display: none;
+            white-space: pre-wrap;
+        }
+
+        .loading-spinner {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--ai-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* REVIEWS SECTION STYLES */
+        .reviews-section {
+            background-color: #f1f5f9;
+            padding: 4rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .write-review-btn {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .write-review-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .review-form-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: none; 
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .star-rating-input {
+            display: flex;
+            gap: 5px;
+            font-size: 1.5rem;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .star-rating-input i.active {
+            color: var(--star-color);
+        }
+
+        .submit-review-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .review-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .review-stars {
+            color: var(--star-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-photo-proof {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+            color: #e2e8f0;
+        }
+        
+        .footer-col a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* MODAL STYLES (Checkout & Tracking) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Tracking Styles */
+        .tracking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .tracking-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background-color: #f1f5f9;
+            z-index: 0;
+        }
+
+        .track-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 34px;
+            height: 34px;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+
+        .track-step.active .step-circle {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .track-step p {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .track-step.active p {
+            color: var(--primary-color);
+        }
+
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: right;
+            margin-top: 1rem;
+            color: var(--primary-color);
+        }
+
+        .payment-section {
+            margin-top: 2rem;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .payment-label {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .payment-label:hover {
+            background-color: #f8fafc;
+            border-color: var(--primary-color);
+        }
+
+        .payment-input {
+            margin-right: 12px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 2rem;
+            padding: 14px;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #059669;
+        }
+
+        .track-btn-main {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Saved Designs Modal Styles */
+        .saved-design-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .design-info h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .design-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .reorder-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="nav-left">
+            <a href="#" class="logo">
+                <img src="images/aidaros-logo                Move-Item '.\Screenshot_2025-12-02_000730-removebg-preview.png' 'C:\Users\Analie Aidaros\OneDrive\Desktop\website\images\aidaros-logo.png'.png" alt="Aidaros Print Services" class="logo-img">
+            </a>
+            <a href="#" class="nav-link" onclick="openTrackModal()">
+                <i class="fa-solid fa-truck-fast"></i> Track Order
+            </a>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-link" onclick="openAccountModal()">
+                <i class="fa-solid fa-user"></i> My Account
+            </div>
+            <div class="cart-icon" onclick="openModal()">
+                <i class="fa-solid fa-print"></i> My Prints <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <h1>Professional Printing Solutions</h1>
+        <p>High-quality business cards, flyers, and marketing materials delivered to your door. Fast turnaround and premium paper stocks.</p>
+        <a href="#shop" class="cta-button">Start Your Order</a>
+    </section>
+
+    <!-- STEP GUIDE SECTION -->
+    <div class="steps-section">
+        <h2 class="section-title" style="margin-bottom: 0.5rem;">Simple Ordering Process</h2>
+        <p class="section-subtitle">Get your custom prints in 4 easy steps</p>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-list-check"></i></div>
+                <h3 class="step-title">1. Choose Product</h3>
+                <p class="step-desc">Select your item and customize options.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <h3 class="step-title">2. Upload Design</h3>
+                <p class="step-desc">Upload your file or personalize gift items.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-eye"></i></div>
+                <h3 class="step-title">3. Confirm Proof</h3>
+                <p class="step-desc">Request a digital proof for peace of mind.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <h3 class="step-title">4. Delivery</h3>
+                <p class="step-desc">Checkout safely and wait for delivery.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT CATALOG START -->
+    <div class="container" id="shop">
+        
+        <!-- SECTION 1: APPAREL & WEARABLES -->
+        <div class="section-header">
+            <h2 class="section-title">👕 Apparel & Wearables</h2>
+            <p class="section-subtitle">Custom clothing for brands, events, and teams.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Custom T-Shirts -->
+            <div class="product-card" data-base-price="250">
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Custom T-Shirts" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Custom T-Shirts</h3>
+                    <p class="product-desc">Regular, Oversized, or Dri-fit options.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Fabric</label>
+                            <select class="option-select">
+                                <option>Regular Cotton</option>
+                                <option>Oversized Tee</option>
+                                <option>Dri-fit (Sports)</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                        <div class="file-upload-wrapper">
+                            <button class="file-upload-btn" onclick="this.nextElementSibling.click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Design</button>
+                            <input type="file" class="file-upload-input" onchange="handleFileUpload(this)">
+                            <div class="file-name" style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">250.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom T-Shirt')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Hoodies -->
+            <div class="product-card" data-base-price="650">
+                <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Hoodies" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Hoodies & Sweatshirts</h3>
+                    <p class="product-desc">Cozy custom print hoodies.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Style</label>
+                            <select class="option-select">
+                                <option>Pullover Hoodie</option>
+                                <option>Crewneck Sweatshirt</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                        <div class="file-upload-wrapper">
+                            <button class="file-upload-btn" onclick="this.nextElementSibling.click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Design</button>
+                            <input type="file" class="file-upload-input" onchange="handleFileUpload(this)">
+                            <div class="file-name" style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">650.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Hoodie')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Polo Shirts -->
+            <div class="product-card" data-base-price="350">
+                <img src="https://images.unsplash.com/photo-1626497764746-6dc36546b388?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Polo" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Polo Shirts</h3>
+                    <p class="product-desc">Embroidery or silk screen service.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Print Method</label>
+                            <select class="option-select">
+                                <option>Embroidery (Logo)</option>
+                                <option>Silk Screen</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">350.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Polo Shirt')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Jackets -->
+            <div class="product-card" data-base-price="800">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Jackets" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Jackets & Outerwear</h3>
+                    <p class="product-desc">Custom windbreakers and varsity jackets.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Type</label>
+                            <select class="option-select">
+                                <option>Windbreaker</option>
+                                <option>Varsity Jacket</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">800.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Jacket')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Caps & Beanies -->
+            <div class="product-card" data-base-price="200">
+                <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Caps" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Caps & Beanies</h3>
+                    <p class="product-desc">Embroidered baseball caps and beanies.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Style</label>
+                            <select class="option-select">
+                                <option>Baseball Cap</option>
+                                <option>Beanie</option>
+                                <option>Bucket Hat</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">200.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Headwear')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Aprons -->
+            <div class="product-card" data-base-price="180">
+                <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Aprons" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Custom Aprons</h3>
+                    <p class="product-desc">For cooking, crafting, or baristas.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Color</label>
+                            <select class="option-select">
+                                <option>Black</option>
+                                <option>White</option>
+                                <option>Navy Blue</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">180.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Apron')">Add to Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: MERCHANDISE & GIFTS -->
+        <div class="section-header">
+            <h2 class="section-title">☕ Merchandise & Gifts</h2>
+            <p class="section-subtitle">Perfect for giveaways and personalized gifts.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Mugs -->
+            <div class="product-card" data-base-price="150">
+                <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Mugs" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Personalized Mug</h3>
+                    <p class="product-desc">Custom printed drinkware.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Type</label>
+                            <select class="option-select">
+                                <option>Regular White</option>
+                                <option>Magic Heat-Change (+50)</option>
+                            </select>
+                        </div>
+                        <!-- NEW: Gift Customization -->
+                        <div class="option-group">
+                            <label class="option-label">Name on Mug</label>
+                            <input type="text" class="text-input" placeholder="Enter Name">
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Short Greeting</label>
+                            <input type="text" class="text-input" placeholder="e.g. Happy Birthday!">
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">150.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Mug')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Tumblers -->
+            <div class="product-card" data-base-price="300">
+                <img src="https://images.unsplash.com/photo-1596483574987-cb993a388f62?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tumblers" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Tumblers & Water Bottles</h3>
+                    <p class="product-desc">Vacuum insulated bottles with name print.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Name to Print</label>
+                            <input type="text" class="text-input" placeholder="Enter Name">
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">300.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Tumbler')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Keychains -->
+            <div class="product-card" data-base-price="50">
+                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Keychains" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Keychains</h3>
+                    <p class="product-desc">Acrylic or metal custom keychains.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Type</label>
+                            <select class="option-select">
+                                <option>Acrylic Photo</option>
+                                <option>Rubberized</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">50.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Keychain')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Pillows -->
+            <div class="product-card" data-base-price="350">
+                <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Pillows" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Personalized Pillows</h3>
+                    <p class="product-desc">Soft pillows with custom photo or text printing.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Message/Name</label>
+                            <input type="text" class="text-input" placeholder="Enter text here">
+                        </div>
+                        <div class="file-upload-wrapper">
+                            <button class="file-upload-btn" onclick="this.nextElementSibling.click()"><i class="fa-solid fa-camera"></i> Upload Photo</button>
+                            <input type="file" class="file-upload-input" onchange="handleFileUpload(this)">
+                            <div class="file-name" style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px;"></div>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">350.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Personalized Pillow')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Tote Bags -->
+            <div class="product-card" data-base-price="120">
+                <img src="https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tote Bags" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Canvas Tote Bags</h3>
+                    <p class="product-desc">Eco-friendly bags with custom print.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <select class="option-select">
+                                <option>12x14 (Small)</option>
+                                <option>14x16 (Medium)</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">120.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Tote Bag')">Add to Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: WALL & PHOTO PRINTS -->
+        <div class="section-header">
+            <h2 class="section-title">🖼️ Wall & Photo Prints</h2>
+            <p class="section-subtitle">Decorate your space with memories.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Posters -->
+            <div class="product-card" data-base-price="100">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Posters" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Posters</h3>
+                    <p class="product-desc">High-quality glossy or matte posters.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <select class="option-select">
+                                <option>A4</option>
+                                <option>A3</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">100.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Poster Print')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Canvas Prints -->
+            <div class="product-card" data-base-price="800">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Canvas" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Canvas Prints</h3>
+                    <p class="product-desc">Museum quality canvas on wood frame.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <select class="option-select">
+                                <option>8x10</option>
+                                <option>12x16</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">800.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Canvas Print')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Wall Stickers -->
+            <div class="product-card" data-base-price="200">
+                <img src="https://images.unsplash.com/photo-1534648758804-629b3c374972?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Decals" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Wall Stickers / Decals</h3>
+                    <p class="product-desc">Removable vinyl decals for walls.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size (sq ft)</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                        <div class="file-upload-wrapper">
+                            <button class="file-upload-btn" onclick="this.nextElementSibling.click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Art</button>
+                            <input type="file" class="file-upload-input" onchange="handleFileUpload(this)">
+                            <div class="file-name" style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">200.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Wall Decal')">Add to Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: BUSINESS & MARKETING MATERIALS -->
+        <div class="section-header">
+            <h2 class="section-title">🛍️ Business & Marketing</h2>
+            <p class="section-subtitle">Professional materials to grow your brand.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Business Cards -->
+            <div class="product-card" data-base-price="850">
+                <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Business Cards" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Business Cards</h3>
+                    <p class="product-desc">500 pcs. Matte or Glossy finish.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Finish</label>
+                            <select class="option-select">
+                                <option>Matte</option>
+                                <option>Glossy</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                        <div class="file-upload-wrapper">
+                            <button class="file-upload-btn" onclick="this.nextElementSibling.click()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Design</button>
+                            <input type="file" class="file-upload-input" onchange="handleFileUpload(this)">
+                            <div class="file-name" style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px;"></div>
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">850.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Business Cards')">Add to Order</button>
+                    <button class="save-btn" onclick="saveDesign('Business Cards')"><i class="fa-regular fa-bookmark"></i> Save Design</button>
+                </div>
+            </div>
+
+            <!-- Flyers -->
+            <div class="product-card" data-base-price="2200">
+                <img src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Flyers" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Flyers & Brochures</h3>
+                    <p class="product-desc">Batch printing for promotions.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Type</label>
+                            <select class="option-select">
+                                <option>Single Page Flyer</option>
+                                <option>Trifold Brochure</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">2,200.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Flyers')">Add to Order</button>
+                    <button class="save-btn" onclick="saveDesign('Flyers')"><i class="fa-regular fa-bookmark"></i> Save Design</button>
+                </div>
+            </div>
+
+            <!-- Tarpaulin -->
+            <div class="product-card" data-base-price="500">
+                <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Tarpaulin" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Tarpaulins & Banners</h3>
+                    <p class="product-desc">Durable event banners.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <select class="option-select">
+                                <option>4x2 ft</option>
+                                <option>6x3 ft</option>
+                                <option>8x4 ft</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">500.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Tarpaulin')">Add to Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: STATIONERY & CREATIVE -->
+        <div class="section-header">
+            <h2 class="section-title">🎨 Stationery & Creative Products</h2>
+            <p class="section-subtitle">Custom stickers, journals, and more.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Stickers -->
+            <div class="product-card" data-base-price="250">
+                <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Stickers" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Stickers</h3>
+                    <p class="product-desc">Vinyl, die-cut, or glossy stickers.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Finish</label>
+                            <select class="option-select">
+                                <option>Glossy</option>
+                                <option>Matte</option>
+                                <option>Vinyl (Waterproof)</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity (Sheets)</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">250.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Stickers')">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Notebooks -->
+            <div class="product-card" data-base-price="150">
+                <img src="https://images.unsplash.com/photo-1544376798-89aa6b82c6cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Notebooks" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Custom Notebooks</h3>
+                    <p class="product-desc">Personalized covers for journals.</p>
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Size</label>
+                            <select class="option-select">
+                                <option>A5</option>
+                                <option>A4</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quantity</label>
+                            <input type="number" class="qty-input" value="1" min="1" onchange="updateProductTotal(this)">
+                        </div>
+                    </div>
+                    <div class="price-row"><span class="unit-price-label">Total:</span><div class="product-total-price">₱<span class="price-display">150.00</span></div></div>
+                    <button class="add-btn" onclick="addToCart(this, 'Custom Notebook')">Add to Order</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NEW: VIP MEMBERSHIP SECTION -->
+    <div class="vip-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">👑 Join Aidaros VIP</h2>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Get priority service and exclusive perks.</p>
+        
+        <div class="vip-card">
+            <i class="fa-solid fa-crown vip-icon"></i>
+            <h3>Premium Membership</h3>
+            <div class="vip-price">₱499<span style="font-size: 1rem; font-weight: 400;">/year</span></div>
+            <ul class="vip-list">
+                <li><i class="fa-solid fa-bolt"></i> <strong>Priority Printing:</strong> Skip the queue every time.</li>
+                <li><i class="fa-solid fa-percent"></i> <strong>10% Discount:</strong> On all orders over ₱500.</li>
+                <li><i class="fa-solid fa-paintbrush"></i> <strong>Exclusive Templates:</strong> Access to premium designs.</li>
+                <li><i class="fa-solid fa-headset"></i> <strong>VIP Support:</strong> Direct line to our design team.</li>
+            </ul>
+            <a href="#" class="vip-btn" onclick="alert('Redirecting to secure payment for VIP Membership...')">Join VIP Now</a>
+        </div>
+    </div>
+
+    <!-- AI FEATURE SECTION -->
+    <div class="container">
+        <div class="ai-section">
+            <div class="ai-header">
+                <span class="ai-badge">New Feature</span>
+                <h2>✨ AI Marketing Assistant</h2>
+                <p>Not sure what to put on your flyer or business card? Describe your business, and our AI will write the perfect text for you!</p>
+            </div>
+            
+            <div class="ai-input-group">
+                <textarea id="ai-input" class="ai-textarea" placeholder="e.g., I have a dog walking business called 'Happy Paws'. I'm offering 20% off for new customers. Write catchy text for a flyer."></textarea>
+                <button class="ai-btn" onclick="generateMarketingCopy()">
+                    Generate Flyer Text ✨
+                </button>
+            </div>
+
+            <div id="ai-loading" class="loading-spinner"></div>
+            
+            <div id="ai-result" class="ai-result"></div>
+        </div>
+    </div>
+
+    <!-- REVIEWS SECTION (Content hidden for brevity, logic preserved) -->
+    <div class="reviews-section">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="reviews-header">
+            <button class="write-review-btn" onclick="toggleReviewForm()">Write a Review</button>
+        </div>
+        
+        <!-- Reviews form & grid code is preserved -->
+        <div class="review-form-container" id="review-form">
+            <!-- Form content preserved -->
+            <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input type="text" id="review-name" class="form-input" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Rating</label>
+                <div class="star-rating-input" id="star-rating">
+                    <i class="fa-solid fa-star" onclick="setRating(1)"></i>
+                    <i class="fa-solid fa-star" onclick="setRating(2)"></i>
+                    <i class="fa-solid fa-star" onclick="setRating(3)"></i>
+                    <i class="fa-solid fa-star" onclick="setRating(4)"></i>
+                    <i class="fa-solid fa-star" onclick="setRating(5)"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Your Review</label>
+                <textarea id="review-comment" class="form-textarea" rows="4" placeholder="Share your experience..."></textarea>
+            </div>
+            <button class="submit-review-btn" onclick="submitReview()">Post Review</button>
+        </div>
+
+        <div class="reviews-grid" id="reviews-grid">
+            <div class="review-card">
+                <img src="image_1955fe.png" alt="Ana Akiyama" class="review-img">
+                <div class="review-author">Ana Akiyama</div>
+                <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"I like here kay dali ra kaayo ang process, dili hasol and barato rasad ang mga printing services nila"</p>
+            </div>
+            <div class="review-card">
+                <img src="image_1951a4.png" alt="Aniza Bragas" class="review-img">
+                <div class="review-author">Aniza Bragas</div>
+                <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"I’ve tried other printing shops before, but Aidaros gave the best price without sacrificing quality. Definitely my go-to for business cards and flyers."</p>
+            </div>
+            <div class="review-card">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" alt="Shyziel Mendez" class="review-img">
+                <div class="review-author">Shyziel Mendez</div>
+                <div class="review-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"- Chada kaayu ang quality sa pag print!! tas Barato pajd"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRACKING MODAL -->
+    <div class="modal-overlay" id="tracking-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Track Your Order</h3>
+                <button class="close-btn" onclick="closeTrackModal()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Order Number</label>
+                <input type="text" id="order-id-input" class="form-input" placeholder="e.g., #ORD-2025-001">
+            </div>
+            <button class="track-btn-main" onclick="trackOrder()">Track Status</button>
+            <div class="tracking-steps" id="tracking-steps" style="display:none; margin-top:2rem;">
+                <div class="track-step" id="step-1"><div class="step-circle"><i class="fa-solid fa-print"></i></div><p>Printing</p></div>
+                <div class="track-step" id="step-2"><div class="step-circle"><i class="fa-solid fa-box"></i></div><p>Packaging</p></div>
+                <div class="track-step" id="step-3"><div class="step-circle"><i class="fa-solid fa-truck"></i></div><p>Shipping</p></div>
+                <div class="track-step" id="step-4"><div class="step-circle"><i class="fa-solid fa-check"></i></div><p>Delivered</p></div>
+            </div>
+            <p id="track-msg" style="text-align:center; color:#64748b; margin-top:1rem;"></p>
+        </div>
+    </div>
+
+    <!-- ACCOUNT MODAL (NEW) -->
+    <div class="modal-overlay" id="account-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>My Account</h3>
+                <button class="close-btn" onclick="closeAccountModal()">&times;</button>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h4 style="margin-bottom:1rem; color:var(--primary-color);">Saved Designs & Previous Orders</h4>
+                
+                <!-- Simulated Saved Design -->
+                <div class="saved-design-item">
+                    <div class="design-info">
+                        <h4>Business Cards (Matte)</h4>
+                        <p>Last ordered: Oct 15, 2024</p>
+                    </div>
+                    <button class="reorder-btn" onclick="addToCart(null, 'Business Cards (Reorder)', 850); closeAccountModal();">
+                        <i class="fa-solid fa-rotate-right"></i> Reorder
+                    </button>
+                </div>
+
+                <!-- Simulated Saved Design -->
+                <div class="saved-design-item">
+                    <div class="design-info">
+                        <h4>Birthday Banner (4x2)</h4>
+                        <p>Saved Draft</p>
+                    </div>
+                    <button class="reorder-btn" onclick="addToCart(null, 'Birthday Banner (Draft)', 500); closeAccountModal();">
+                        <i class="fa-solid fa-cart-plus"></i> Order Now
+                    </button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+                <p style="font-size: 0.9rem; color: #64748b;">Logged in as: <strong>Analie Aidaros</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Review Your Prints</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="cart-items" id="cart-list">
+                <p style="text-align: center; color: #64748b;">You haven't selected any prints yet.</p>
+            </div>
+            
+            <div class="cart-total">
+                Total: ₱<span id="total-price">0.00</span>
+            </div>
+            <div class="payment-section">
+                <h4>Payment Method</h4>
+                <div class="payment-options">
+                    <label class="payment-label">
+                        <input type="radio" name="payment" value="gcash" class="payment-input" checked>
+                        <i class="fa-solid fa-wallet" style="margin-right:8px; color:#007dfc;"></i> GCash
+                    </label>
+                    <label class="payment-label">
+                        <input type="radio" name="payment" value="maya" class="payment-input">
+                        <i class="fa-solid fa-wallet" style="margin-right:8px; color:#10b981;"></i> Maya
+                    </label>
+                    <label class="payment-label">
+                        <input type="radio" name="payment" value="bank" class="payment-input">
+                        <i class="fa-solid fa-building-columns" style="margin-right:8px; color:#64748b;"></i> Bank Transfer
+                    </label>
+                    <label class="payment-label">
+                        <input type="radio" name="payment" value="card" class="payment-input">
+                        <i class="fa-solid fa-credit-card" style="margin-right:8px; color:#6366f1;"></i> Credit/Debit Card
+                    </label>
+                    <label class="payment-label">
+                        <input type="radio" name="payment" value="cod" class="payment-input">
+                        <i class="fa-solid fa-money-bill-wave" style="margin-right:8px; color:#f59e0b;"></i> Cash on Delivery
+                    </label>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 class="logo" style="color: white; margin-bottom: 1rem;">AidarosPrint.</h3>
+                <p>Bringing your ideas to life with high-quality print solutions. Fast, reliable, and professional service for all your business needs.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><strong>Phone:</strong> 09123456789</p>
+                <p><strong>Email:</strong> <a href="mailto:analieaidaros8@gmail.com">analieaidaros8@gmail.com</a></p>
+                <p><strong>Bluetooth:</strong> ArsolaCraft</p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <p><strong>Facebook:</strong> <a href="#">Analie Aidaros</a></p>
+                <p><strong>Instagram:</strong> <a href="#">U_can_callme_love</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Aidaros Print Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- CART & PRICE LOGIC ---
+        let cartItems = [];
+        const cartCountElement = document.getElementById('cart-count');
+        const cartListElement = document.getElementById('cart-list');
+        const totalPriceElement = document.getElementById('total-price');
+        const modal = document.getElementById('checkout-modal');
+        const trackModal = document.getElementById('tracking-modal');
+        const accountModal = document.getElementById('account-modal');
+
+        function updateProductTotal(inputElement) {
+            const card = inputElement.closest('.product-card');
+            const basePrice = parseFloat(card.getAttribute('data-base-price'));
+            const quantity = parseInt(inputElement.value) || 1;
+            const proofCheckbox = card.querySelector('.proof-input');
+            const proofCost = (proofCheckbox && proofCheckbox.checked) ? 50 : 0;
+            const total = (basePrice * quantity) + proofCost;
+            const displayElement = card.querySelector('.price-display');
+            displayElement.innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        function handleFileUpload(input) {
+            const fileNameDiv = input.nextElementSibling;
+            if (input.files.length > 0) {
+                fileNameDiv.innerText = "Selected: " + input.files[0].name;
+            } else {
+                fileNameDiv.innerText = "";
+            }
+        }
+
+        function saveDesign(productName) {
+            alert(`"${productName}" has been saved to your account! You can reorder it anytime.`);
+        }
+
+        function addToCart(btnElement, productName, overridePrice) {
+            let finalPrice = 0;
+            let displayName = productName;
+
+            if (overridePrice) {
+                // For reordering from account
+                finalPrice = overridePrice;
+            } else {
+                // For adding from product card
+                const card = btnElement.closest('.product-card');
+                const priceText = card.querySelector('.price-display').innerText.replace(/,/g, '');
+                finalPrice = parseFloat(priceText);
+                
+                const quantity = card.querySelector('.qty-input').value;
+                const proofCheck = card.querySelector('.proof-input');
+                const hasProof = (proofCheck && proofCheck.checked) ? " + Proof" : "";
+                
+                // Check for personalization inputs
+                const textInputs = card.querySelectorAll('.text-input');
+                let extras = "";
+                textInputs.forEach(input => {
+                    if(input.value) extras += ` (${input.value})`;
+                });
+
+                displayName = `${productName} (x${quantity})${hasProof}${extras}`;
+            }
+
+            cartItems.push({ name: displayName, price: finalPrice });
+            updateCartUI();
+            
+            cartCountElement.style.transform = "scale(1.2)";
+            setTimeout(() => {
+                cartCountElement.style.transform = "scale(1)";
+            }, 200);
+        }
+
+        function updateCartUI() {
+            cartCountElement.innerText = cartItems.length;
+            if (cartItems.length === 0) {
+                cartListElement.innerHTML = '<p style="text-align: center; color: #64748b;">You haven\'t selected any prints yet.</p>';
+                totalPriceElement.innerText = "0.00";
+            } else {
+                let html = '';
+                let total = 0;
+                cartItems.forEach((item) => {
+                    html += `
+                    <div class="cart-item">
+                        <span>${item.name}</span>
+                        <span>₱${item.price.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                    </div>`;
+                    total += item.price;
+                });
+                cartListElement.innerHTML = html;
+                totalPriceElement.innerText = total.toLocaleString(undefined, {minimumFractionDigits: 2});
+            }
+        }
+
+        // --- CHECKOUT LOGIC ---
+        function openModal() { modal.classList.add('active'); }
+        function closeModal() { modal.classList.remove('active'); }
+
+        function placeOrder() {
+            if (cartItems.length === 0) {
+                alert("You haven't selected any prints yet!");
+                return;
+            }
+
+            const paymentMethods = document.getElementsByName('payment');
+            let selectedPayment;
+            for (const method of paymentMethods) {
+                if (method.checked) {
+                    selectedPayment = method.value;
+                    break;
+                }
+            }
+            let paymentText = "Cash on Delivery";
+            if (selectedPayment === 'gcash') paymentText = "GCash";
+            if (selectedPayment === 'maya') paymentText = "Maya";
+            if (selectedPayment === 'card') paymentText = "Credit/Debit Card";
+            if (selectedPayment === 'bank') paymentText = "Bank Transfer";
+
+            alert(`Thank you! Your order has been placed using ${paymentText}. We will contact you at 09123456789 to confirm details.`);
+            cartItems = [];
+            updateCartUI();
+            closeModal();
+        }
+
+        // --- ORDER TRACKING LOGIC ---
+        function openTrackModal() { trackModal.classList.add('active'); }
+        function closeTrackModal() {
+            trackModal.classList.remove('active');
+            document.getElementById('tracking-steps').style.display = 'none';
+            document.getElementById('track-msg').innerText = '';
+            document.getElementById('order-id-input').value = '';
+        }
+
+        function trackOrder() {
+            const orderId = document.getElementById('order-id-input').value;
+            if (!orderId) { alert("Please enter an Order Number!"); return; }
+            document.getElementById('tracking-steps').style.display = 'flex';
+            document.getElementById('track-msg').innerText = `Status found for ${orderId}`;
+            for(let i=1; i<=4; i++) document.getElementById(`step-${i}`).classList.remove('active');
+            const randomStage = Math.floor(Math.random() * 4) + 1;
+            for(let i=1; i<=randomStage; i++) document.getElementById(`step-${i}`).classList.add('active');
+        }
+
+        // --- ACCOUNT MODAL LOGIC ---
+        function openAccountModal() { accountModal.classList.add('active'); }
+        function closeAccountModal() { accountModal.classList.remove('active'); }
+
+        // --- REVIEW SYSTEM ---
+        let currentRating = 0;
+        function toggleReviewForm() {
+            const form = document.getElementById('review-form');
+            form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+        }
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll('.star-rating-input i');
+            stars.forEach((star, index) => {
+                if (index < rating) star.classList.add('active');
+                else star.classList.remove('active');
+            });
+        }
+        function submitReview() {
+            const name = document.getElementById('review-name').value;
+            const comment = document.getElementById('review-comment').value;
+            if (!name || !comment || currentRating === 0) { alert("Please fill in your name, rating, and review!"); return; }
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < currentRating) starsHtml += '<i class="fa-solid fa-star"></i>';
+                else starsHtml += '<i class="fa-regular fa-star"></i>';
+            }
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+                <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60" alt="${name}" class="review-img">
+                <div class="review-author">${name}</div>
+                <div class="review-stars">${starsHtml}</div>
+                <p class="review-text">"${comment}"</p>
+            `;
+            const grid = document.getElementById('reviews-grid');
+            grid.prepend(reviewCard);
+            document.getElementById('review-name').value = '';
+            document.getElementById('review-comment').value = '';
+            setRating(0);
+            toggleReviewForm();
+            alert("Review Posted Successfully!");
+        }
+
+        // --- GEMINI AI LOGIC ---
+        async function generateMarketingCopy() {
+            const apiKey = ""; 
+            const userPrompt = document.getElementById('ai-input').value;
+            const resultArea = document.getElementById('ai-result');
+            const loadingSpinner = document.getElementById('ai-loading');
+
+            if (!userPrompt) { alert("Please describe your business or event first!"); return; }
+
+            resultArea.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+
+            const systemPrompt = "You are an expert marketing copywriter for a printing service called Aidaros Print Services. The user needs text for a flyer, business card, or brochure. Based on their input, generate 3 distinct, professional, and catchy text options they can print. Label them Option 1, Option 2, and Option 3. Keep the tone professional but engaging.";
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userPrompt }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't generate text right now. Please try again.";
+                const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                resultArea.innerHTML = formattedText;
+                resultArea.style.display = 'block';
+            } catch (error) {
+                console.error("AI Error:", error);
+                resultArea.innerHTML = "Error connecting to AI service. Please check your internet connection and try again.";
+                resultArea.style.display = 'block';
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        // Close modals on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+            if (e.target === trackModal) closeTrackModal();
+            if (e.target === accountModal) closeAccountModal();
+        });
+
+    </script>
+
+</body>
+</html>
